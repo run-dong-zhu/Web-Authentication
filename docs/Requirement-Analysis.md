@@ -30,3 +30,17 @@ Please include a Dockerfile, and the command to get started (including what envi
 Please include a README that documents your application, how to use the API, how to run it locally, dependencies etc.
 
 You can use Javascript w/ NodeJS, or Go. You can choose any relational DB you want (MySQL/Postgres)
+
+## Analysis
+
+Based on requirement Analysis, this software can divided into sub-problems below:
+
+Functional Requirements:
+    1. Allow user to sign in via ogle, Microsoft, Github, etc
+    2. Store user profile in database (whitelist)
+    3. Using JWT for user authentication
+    4. User on whitelist ables to another user on whitelist
+
+Non-functional Requirements:
+    1. Programming Language: Javascript w/ NodeJS, or Go
+    2. Database Options: MySQL/Postgres
