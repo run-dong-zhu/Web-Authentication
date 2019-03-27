@@ -35,12 +35,12 @@ You can use Javascript w/ NodeJS, or Go. You can choose any relational DB you wa
 
 Based on requirement Analysis, this software can divided into sub-problems below:
 
-Functional Requirements:
-    1. Allow user to sign in via ogle, Microsoft, Github, etc
-    2. Store user profile in database (whitelist)
-    3. Using JWT for user authentication
-    4. User on whitelist ables to another user on whitelist
+Functional Requirements: <br/>
+1. Allow user to sign in via Google, Microsoft, Github, etc
+2. Store user profile in database (whitelist)
+3. Using JWT for user authentication
+4. User on whitelist ables to another user on whitelist
 
-Non-functional Requirements:
-    1. Programming Language: Javascript w/ NodeJS, or Go
-    2. Database Options: MySQL/Postgres
+Non-functional Requirements: <br/>
+1. Programming Language: Javascript w/ NodeJS, or Go
+2. Database Options: MySQL/Postgres
