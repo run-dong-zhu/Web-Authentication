@@ -7,7 +7,10 @@
 2. Decompress and open forder
 3. Open .yml file to see environment config
 4. Open **config.js** put require information, e.g. database info, Google project info
-5. Insert first user email via bash, because only a whitelist user can add another whitelist user
+5. Insert first user email via bash, because only a whitelist user can add another whitelist user. (Or, add setup.js in app.js)
+```
+const setup = require('./setup');
+```
 6. Open terminal run: npm install
 7. Lanuch server, run: npm run start-dev
 
