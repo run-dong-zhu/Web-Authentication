@@ -1,0 +1,13 @@
+<h1>{{title}}</h1>
+<p>All Whitelist Users</p>
+
+{{#each whitelist}}
+<li>{{this.id}}, {{ this.email }}</li>
+{{/each}}
+
+<form action='/add-user' method="POST">
+  Please enter Email:<br>
+  <input type="email" name="email">
+  <br>
+  <input type="submit">
+</form>
