@@ -1,12 +1,15 @@
+const auth = require('./auth');
 const { Pool, Client } = require('pg');
 
 const pool = new Pool({
-	user: 'zhurundong', // enter your host
-	host: 'localhost',  //
-	database: 'web_authen',
-	password: '',
-	port: 5432
+	user: auth.dbconfig.user, // enter your host
+	host: auth.dbconfig.host,  //
+	database: auth.dbconfig.database,
+	password: auth.dbconfig.password,
+	port: auth.dbconfig.port
 });
+
+const email = auth.email;
 
 pool.query('SELECT NOW()', (err, res) => {
     if (err) {
@@ -27,10 +30,19 @@ pool.query(initTable, (err, res) => {
     }
 });
 
-// pool.query(initUser, ["bobbyzhu1992@gmail.com"], (err, res) => {
-// 	console.log(err, res);
-// 	pool.end();
-// })
+pool.query("SELECT * FROM users WHERE email = ($1)", [email], (error, result) => {
+    if(error) {
+        throw error;
+    }
+    if(result.rows.length == 0) {
+        pool.query("INSERT INTO users (email) VALUES ($1)", [email], (error, results) => {
+            if(error) {
+                throw error;
+            }
+        });
+    }
+    console.log("User:" + email + " has been CREATED or EXISTS");
+});
 
 const client = new Client({
 	user: 'zhurundong',

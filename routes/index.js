@@ -80,6 +80,7 @@ router.post('/add-user', isWhite, (req, res, next) => {
     });
 });
 
+/*
 router.get('/auth/facebook', passport.authenticate('facebook', {
     scope : ['email']
 }));
@@ -88,6 +89,7 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', {
     successRedirect: '/signin',
     failureRedirect: '/'
 }));
+*/
 
 router.get('/auth/google', passport.authenticate('google', {
     scope : ['email']
@@ -122,5 +124,6 @@ function isWhite(req, res, next) {
         next();
     } catch (error) {
         console.log(error);
+        res.redirect('/')
     }
 }
