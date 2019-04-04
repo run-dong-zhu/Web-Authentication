@@ -27,10 +27,10 @@ pool.query(initTable, (err, res) => {
     }
 });
 
-// pool.query(initUser, ["bobbyzhu1992@gmail.com"], (err, res) => {
-// 	console.log(err, res);
-// 	pool.end();
-// })
+pool.query('SELECT email FROM users WHERE email = ($1)', ["bobbyzhu1992@gmail.com"], (err, res) => {
+	console.log(err, res);
+	pool.end();
+})
 
 const client = new Client({
 	user: 'zhurundong',
