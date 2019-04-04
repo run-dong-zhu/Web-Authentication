@@ -1,46 +1,22 @@
 const express = require('express');
-const router = express.Router();
+const router = require('express-promise-router')();
 const passport = require('passport');
+const passportConf = require('../auth/passport');
 
-const Pool = require('pg').Pool;
-const pool = new Pool({
-    user: 'zhurundong',
-    host: 'localhost',
-    database: 'web_authen',
-    port: 5432
-});
+const { validateBody, schemas } = require('../helpers/routeHelpers');
+const UsersController = require('../controllers/users');
+const checkAuth = require('../auth/check-auth');
 
-/* GET users listing. */
-router.get('/signin', (req, res, next) => {
-	var messages = req.flash('error');
-	res.render('user/signin', {
-		messages: messages
-	});
-});
+router.route('/signup')
+  .post(validateBody(schemas.authSchema), checkAuth, UsersController.signUp);
 
-router.get('/login', (req, res, next) => {
-    res.render('oauth');
-});
+router.route('/signin')
+  .post(UsersController.signIn);
 
-router.post('/login', (req, res, next) => {
-    var email = req.body.email;
+router.route('/oauth/google')
+  .post(passport.authenticate('googleToken', { session: false }), UsersController.googleOAuth);
 
-    pool.query('SELECT * FROM users WHERE email = $1', [email], (error, results) => {
-        if (error) {
-            throw error;
-        }
-        //console.log(results.rows);
-        if(results.rows.length < 1) {
-            console.log("invaild email address");
-            res.redirect('/');
-        }
-        else {
-            //res.render('signin', { title: "Login with Facebook"});
-            res.redirect('/login');
-        }
-    });
-});
-
-router.post('/signin', passport.authenticate('facebook'));
+router.route('/whitelist')
+  .get(checkAuth, UsersController.whitelist);
 
 module.exports = router;
